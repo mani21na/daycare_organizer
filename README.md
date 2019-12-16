@@ -2,7 +2,21 @@
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/daycare_organizer`. To experiment with that code, run `bin/console` for an interactive prompt.
 
-TODO: Delete this and the text above, and describe your gem
+Daycare Organizer.
+
+1)Users(Parents) are able to sign up, sign in, sign out
+2)Validate uniqueness of user login attribute (kid name and phone number, email)
+3)Users(Parents) are able to enter check in/out time, special features, and fill out/update their kids’ profile after login. Users can read new information or announcements from Daycare as well.
+4)Daycare administrators can login with administrator privileges to manage announcements and information of Daycare.
+
+a kid belongs_to a parent
+a kid belongs_to a Daycare
+
+a parent has_many :kids
+parent has_many :daycares through :kids (in case the kids went to different daycares)
+
+a daycare has_many :kids
+a daycare has_many parents through kids
 
 ## Installation
 

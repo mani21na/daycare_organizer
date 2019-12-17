@@ -1,4 +1,4 @@
-class CreateDaycares < ActiveRecord::Migration
+class CreateDaycares < ActiveRecord::Migration[5.2]
   def change
     create_table :daycares do |t|
       t.string :name

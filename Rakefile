@@ -7,4 +7,9 @@ task :default => :spec
 
 RSpec::Core::RakeTask.new(:spec)
 
-ENV["SINATRA_ENV"] ||= "development"
+#ENV["SINATRA_ENV"] ||= "development"
+
+desc 'Console for my application'
+task :console do
+    Pry.start
+end

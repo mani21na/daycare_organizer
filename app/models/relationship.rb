@@ -1,4 +1,4 @@
 class Relationship < ActiveRecord::Base 
-    belongs to :user
-    belongs to :student
+    belongs_to :user
+    belongs_to :student
 end

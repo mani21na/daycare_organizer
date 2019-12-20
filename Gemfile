@@ -1,6 +1,3 @@
-
-
-
 source 'http://rubygems.org'
 
 gem 'activerecord', '5.2.3', :require => 'active_record'
@@ -18,3 +15,4 @@ gem 'sqlite3', '~>1.3.6'
 gem 'thin'
 gem 'tux'
 gem 'capybara'
+gem 'bootstrap', '~> 4.4.1'

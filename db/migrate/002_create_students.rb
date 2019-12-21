@@ -9,6 +9,8 @@ class CreateStudents < ActiveRecord::Migration[5.2]
       t.string :allergies
       t.string :admission_date
       t.text :information
+      t.string :user_id
+      t.string :daycare_id
       t.timestamps null: false
     end 
   end

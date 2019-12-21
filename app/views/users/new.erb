@@ -1,2 +1,90 @@
-<h2>Create Your Account</h2>
-<form></form>
+<!doctype html>
+<html>
+  <head>
+    <title>Daycare Organizer</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style>
+        body {
+            background-image:url('/img/wheat.png');
+        }
+
+        #login .container #login-row #login-column #login-box {
+            margin-top: 120px;
+            max-width: 600px;
+            height: 830px;
+            background-color: rgba(234, 234, 234, 0.9);
+        }
+
+        #login .container #login-row #login-column #login-box #login-form {
+            padding: 20px;
+        }
+
+        #login .container #login-row #login-column #login-box #login-form #register-link {
+            margin-top: -85px;
+            margin-bottom: -85px;
+        }
+    </style>
+
+  </head>    
+    
+    <body>
+    <div id="login">
+
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="/users" method="post">
+                            <h3 class="text-center text-dark">Register</h3>
+                            <div class="form-group">
+                                <label for="login_id" class="text-dark">Username:</label><br>
+                                <input type="text" name="login_id" id="login_id" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-dark">Password:</label><br>
+                                <input type="text" name="password" id="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="first_name" class="text-dark">First Name:</label><br>
+                                <input type="text" name="first_name" id="first_name" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="last_name" class="text-dark">Last Name:</label><br>
+                                <input type="text" name="last_name" id="last_name" class="form-control">
+                            </div> 
+                            <div class="form-group">
+                                <label for="phone" class="text-dark">Phone Number:</label><br>
+                                <input type="text" name="phone" id="phone" class="form-control">
+                            </div> 
+                            <div class="form-group">
+                                <label for="address" class="text-dark">Address:</label><br>
+                                <input type="text" name="address" id="address" class="form-control">
+                            </div> 
+                            <div class="form-group">
+                                <label for="relationship" class="text-dark">Relationship with student(s):</label><br>
+                                <input type="text" name="relationship" id="relationship" class="form-control">
+                            </div> 
+                            <div class="form-group">
+                                <label for="alternative_phone" class="text-dark">Alternative Phone Number:</label><br>
+                                <input type="text" name="alternative_phone" id="alternative_phone" class="form-control">
+                            </div>                             
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

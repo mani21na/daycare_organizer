@@ -18,7 +18,7 @@
         }
 
         .jumbotron{
-            background-color: rgba(255,255,255, 0.7);
+            background-color: rgba(255,255,255, 0.8);
             color: inherit;
         }
 
@@ -52,9 +52,14 @@
                     <div id="login-box" class="col-md-12">
                         <form id="login-form" class="form" action="/login" method="POST">
                             <h3 class="text-center text-dark">Login</h3>
+                            <%if @error_msg == true%>
+                            <div class="form-group">
+                                <a class="text-danger">Wrong username or wrong password. Try again</a>
+                            </div>
+                            <%end%>
                             <div class="form-group">
                                 <label for="username" class="text-dark">Username:</label><br>
-                                <input type="text" name="username" id="username" class="form-control">
+                                <input type="text" name="login_id" id="login_id" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-dark">Password:</label><br>

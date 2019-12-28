@@ -9,9 +9,14 @@ class UsersController < ApplicationController
         #check uniqueness id?
 
         #create new user from M
-        new_user = User.new(:username => params[:username], :email => params[:email], :profile_pic => params[:profile_pic], :age => params[:age])
-        new_user.save
-        redirect ('/users')
+        if params[:username] == "" || params[:password] == ""
+            @error_msg = true
+            redirect to '/signup'
+          else
+            @user = User.create(:username => params[:username], :password => params[:password])
+            session[:user_id] = @user.id
+            redirect '/show'
+          end
         #check params
 
         #redirect to ('/show')
@@ -19,14 +24,17 @@ class UsersController < ApplicationController
 
     #login
     post '/login' do
-        @user = User.find_by(:username => params[:username], :password => params[:password])
-        if @user
-            session[:user_id] = @user.id
-            redirect('/show')
-        else 
-            erb :error
+        @user = User.find_by(:login_id => params[:login_id], :password => params[:password])
+        @error_msg = false
+        if user && user.authenticate(params[:password])
+            session[:user_id] = user.login_id
+            redirect '/dashboard'
+          else
+            @error_msg = true
+            redirect to '/index'
+          end
+          @error_msg = false
         end
-    end
 
 
 end

@@ -1,12 +1,13 @@
- 
+
 
     <div id="outline">
         <div class="container">
             <div id="outline-row" class="row justify-content-center align-items-center">
                 <div id="outline-column" class="col-md-6">
                     <div id="outline-box" class="col-md-12">
-                        <form id="outline-form" class="form" action="/user" method="post">
-                            <h3 class="text-center text-dark">Register</h3>
+                        <form id="outline-form" class="form" action="/user/edit" method="POST">
+                            <input id="hidden" type="hidden" name="_method" value="patch">
+                            <h3 class="text-center text-dark">User Account Settings</h3>
                             <% if @error == true %>
                                 <div class="form-group">
                                     <a class="text-danger"> <%=@error_msg%> </a>
@@ -14,7 +15,7 @@
                             <%end%>
                             <div class="form-group">
                                 <label for="username" class="text-dark">Username:</label><br>
-                                <input type="email" class="form-control" id="username" name="username" placeholder="name@example.com">
+                                <input type="email" class="form-control" id="username" name="username" value="<%= @user.username %>" disabled>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-dark">Password:</label><br>
@@ -22,40 +23,39 @@
                             </div>
                             <div class="form-group">
                                 <label for="first_name" class="text-dark">First Name:</label><br>
-                                <input type="text" name="first_name" id="first_name" class="form-control">
+                                <input type="text" name="first_name" id="first_name" class="form-control" value="<%= @user.first_name %>">
                             </div>
                             <div class="form-group">
                                 <label for="last_name" class="text-dark">Last Name:</label><br>
-                                <input type="text" name="last_name" id="last_name" class="form-control">
+                                <input type="text" name="last_name" id="last_name" class="form-control" value="<%= @user.last_name %>">
                             </div> 
                             <div class="form-group">
                                 <label for="phone" class="text-dark">Telephone:</label><br>
-                                <input class="form-control" type="tel" value="(555)-555-5555" name="phone" id="phone">
+                                <input class="form-control" type="tel" value="<%= @user.phone %>" name="phone" id="phone">
                             </div> 
                             <div class="form-group">
                                 <label for="address" class="text-dark">Address:</label><br>
-                                <input type="text" name="address" id="address" class="form-control">
+                                <input type="text" name="address" id="address" class="form-control" value="<%= @user.address %>">
                             </div> 
                             <div class="form-group">
                                 <label for="relationship" class="text-dark">Relationship with student(s):</label><br>
-                                <div class="form-group">
-                                    <select name="relationship" id="relationship" class="form-control">
-                                        <option>Mother</option>
-                                        <option>Father</option>
-                                        <option>Relative</option>
-                                        <option>Babysitter</option>
-                                    </select>
-                                </div>
+                                <input type="text" name="relationship" id="relationship" class="form-control" value="<%= @user.relationship %>" disabled><br>
+                                <select name="relationship" id="relationship" class="form-control">
+                                    <option>Mother</option>
+                                    <option>Father</option>
+                                    <option>Relative</option>
+                                    <option>Babysitter</option>
+                                </select>
                             </div> 
                             <div class="form-group">
                                 <label for="alternative_phone" class="text-dark">Alternative Telephone:</label><br>
-                                <input type="tel" value="(555)-555-5555" name="alternative_phone" id="alternative_phone" class="form-control">
+                                <input type="tel" value="<%= @user.alternative_phone %>" name="alternative_phone" id="alternative_phone" class="form-control">
                             </div>                             
                             <div class="form-group">
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
                             </div>
                             <div id="link" class="text-right">
-                                <a href="/" class="text-dark">Back to Login</a>
+                                <a href="/show" class="text-dark">Back to Main</a>
                             </div>
                         </form>
                     </div>

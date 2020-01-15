@@ -31,19 +31,20 @@ ActiveRecord::Schema.define(version: 3) do
     t.string "allergies"
     t.string "admission_date"
     t.text "information"
-    t.string "user_id"
-    t.string "daycare_id"
+    t.integer "user_id"
+    t.integer "daycare_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "login_id"
-    t.string "password"
+    t.string "username"
+    t.string "password_digest"
     t.string "first_name"
     t.string "last_name"
     t.string "phone"
     t.text "address"
+    t.string "relationship"
     t.string "alternative_phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

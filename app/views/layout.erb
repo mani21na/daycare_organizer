@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Daycare Organizer</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style>
+        /*body {
+            <!-- background-image:url('/img/wheat.png');
+        }*/
+
+        .jumbotron{
+            background-color: rgba(255,255,255, 0.8);
+            color: inherit;
+        }
+
+        #outline .container #outline-row #outline-column #outline-box {
+            margin-top: 100px;
+            width: 100%;
+            margin-bottom: 100px;
+            height: 75%;
+            background-color: rgba(234, 234, 234, 0.9);
+        }
+        
+        #outline .container #outline-row #outline-column #outline-box #outline-form #link {
+            padding: 50px;
+        }
+
+        #outline .container #outline-row #outline-column #outline-box #outline-form #link {
+            margin-top: -85px;
+
+        }
+
+        
+    </style>
+
+  </head>
+  <body>
+    <% if logged_in? %>
+
+      <div class="jumbotron text-center">
+        <h1>Happy-Easy Care</h1>
+        <h3>Hello! <%= current_user.username %></h3>
+        <form form action="/logout" method="get">
+          <input type="submit" class="btn btn-warning pull-left" value="Log Out">            
+        </form>
+      </div>
+
+    <% else %>
+      <div class="jumbotron text-center">
+        <h1>Happy-Easy Care</h1>
+        <p>App for easy parent communication, digital daily reports and check in/out in daycare</p>
+      </div>
+    <%end %>
+    
+    <% if !@error_message.nil? %>
+      <div class="alert alert-warning">
+        <%= @error_message %>
+      </div>
+    <% end %>
+
+    <%= yield %>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

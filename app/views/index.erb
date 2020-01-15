@@ -1,65 +1,19 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Daycare Organizer</title>
 
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <meta name="viewport" content="width = device-width, initial-scale = 1">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-    <style>
-        body {
-            background-image:url('/img/wheat.png');
-        }
-
-        .jumbotron{
-            background-color: rgba(255,255,255, 0.8);
-            color: inherit;
-        }
-
-        #login .container #login-row #login-column #login-box {
-            margin-top: 120px;
-            max-width: 600px;
-            height: 320px;
-            background-color: rgba(234, 234, 234, 0.9);
-        }
-        
-        #login .container #login-row #login-column #login-box #login-form {
-            padding: 20px;
-        }
-
-        #login .container #login-row #login-column #login-box #login-form #register-link {
-            margin-top: -85px;
-        }
-    </style>
-
-  </head>
-  <body>
-    <div class="jumbotron text-center">
-        <h1>Happy-Easy Care</h1>
-        <p>App for easy parent communication, digital daily reports and check in/out in daycare</p>
-    </div>
-
-    <div id="login">
+    <div id="outline">
         <div class="container">
-            <div id="login-row" class="row justify-content-center align-items-center">
-                <div id="login-column" class="col-md-6">
-                    <div id="login-box" class="col-md-12">
-                        <form id="login-form" class="form" action="/login" method="POST">
-                            <h3 class="text-center text-dark">Login</h3>
-                            <%if @error_msg == true%>
+            <div id="outline-row" class="row justify-content-center align-items-center">
+                <div id="outline-column" class="col-md-6">
+                    <div id="outline-box" class="col-md-12">
+                        <form id="outline-form" class="form" action="/login" method="POST">
+                            <h3 class="text-center text-dark">Log-in</h3>
                             <div class="form-group">
-                                <a class="text-danger">Wrong username or wrong password. Try again</a>
+                                <a class="text-danger"><%if @error_msg == true%>Wrong username or wrong password. Try again
+                                                        <%elsif @error_msg_2 == true%>Your Session Is Time Out, Please Login Again.<%end%></a>
                             </div>
-                            <%end%>
                             <div class="form-group">
                                 <label for="username" class="text-dark">Username:</label><br>
-                                <input type="text" name="login_id" id="login_id" class="form-control">
+                                <input type="email" class="form-control" id="username" name="username" placeholder="name@example.com">
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-dark">Password:</label><br>
@@ -69,7 +23,7 @@
                                 <label for="remember-me" class="text-dark"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
                             </div>
-                            <div id="register-link" class="text-right">
+                            <div id="link" class="text-right">
                                 <a href="/signup" class="text-dark">Register here</a>
                             </div>
                         </form>
@@ -79,10 +33,4 @@
         </div>
     </div>
     
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  </body>
-</html>
+ 

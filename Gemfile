@@ -16,4 +16,4 @@ gem 'thin'
 gem 'tux'
 gem 'capybara'
 gem 'bootstrap', '~> 4.4.1'
-gem 'bcrypt'
+gem 'bcrypt' #transforming password

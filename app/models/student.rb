@@ -1,4 +1,4 @@
 class Student < ActiveRecord::Base 
     belongs_to :user
-    belongs_to :daycar
+    belongs_to :daycare
 end

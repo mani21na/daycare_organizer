@@ -15,110 +15,80 @@
                                 <input type="text" class="form-control" id="first_name" name="first_name">
                             </div>
                             <div class="form-group">
-                                <label for="last_name" class="text-dark">Last Name:</label><br>
+                                <label for="birth_date" class="text-dark">Last Name:</label><br>
                                 <input type="text" name="last_name" id="last_name" class="form-control">
                             </div>
-                            <!-- ERROR : dosen't work javascript -->
-                            <div class="form-group" data-provide="datepicker">
-                                    <label for="birth_date" class="text-dark">Birth Date:</label><br>
-                                    <input type='text' class="form-control" name="birth_date" id="birth_date">
-                                    <div class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </div>
-                            </div>
-                            <script type="text/javascript">
-                                $(function () {
-                                    $('#datetimepicker10').datetimepicker({
-                                        viewMode: 'years',
-                                        format: 'MM/YYYY'
-                                    });
-                                });
-                            </script>
-                            </div>
-                            <!-- ERROR: not able to send daycare_id -->
+                            <div class="form-group">
+                                <label for="birth_date" class="text-dark">Birth Date:</label><br>
+                                <input type="date" name="birth_date" id="birth_date" class="form-control">
+                            </div> 
                             <div class="form-group">
                                 <label for="daycare_id" class="text-dark">Daycare:</label><br>
                                 <select name="daycare_id" id="daycare_id" class="form-control">
                                     <% @daycares.each do |daycare| %>
-                                        <option value="<% daycare.id %>"><%= daycare.name %></option>
+                                        <option value="<%= daycare.id %>"><%= daycare.name %></option>
                                     <% end %>
                                 </select>
                             </div>
                             <!-- ERROR: not able to send multiple attendance day -->
                             <fieldset class="form-group" name="attendance_day" id="attendance_day">
-                                <div class="row">
-                                  <legend class="col-form-label col-sm-2 pt-0">Attendance Day</legend>
-                                  <div class="col-sm-10">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="mon" id="attendance_day" value="mon" checked>
+                                <div class="column">
+                                  <label for="attendance_day" class="text-dark">Attendance Day</label><br>
+                                    <div class="form-check" name="attendance_day" id="attendance_day">
+                                        <input class="form-check-input" type="checkbox" name="attendance_day" value="mon">&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="attendance_day">
                                             Mon
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="tue" id="attendance_day" value="tue">
+                                        <input class="form-check-input" type="checkbox" name="attendance_day" value="tue">&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="attendance_day">
                                             Tue
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="wed" id="attendance_day" value="wed">
+                                        <input class="form-check-input" type="checkbox" name="attendance_day" value="wed">&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="attendance_day">
                                             Wed
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="thu" id="attendance_day" value="thu">
+                                        <input class="form-check-input" type="checkbox" name="attendance_day" value="thu">&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="attendance_day">
                                             Thu
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="fri" id="attendance_day" value="fri">
+                                        <input class="form-check-input" type="checkbox" name="attendance_day" value="fri">&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="attendance_day">
                                             Fri
                                         </label> 
                                     </div>
-                                  </div>
                                 </div>
                             </fieldset>
-                            <fieldset class="form-group">
-                                <div class="row">
-                                  <legend class="col-form-label col-sm-2 pt-0">Check Allergy:</legend>
-                                  <div class="col-sm-10">
+                            <div class="form-group">
+                                  <label for="check_allergy" class="text-dark">Check Allergy:</label><br>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="check_allergy" id="check_allergy" value="true">
+                                        <input class="form-check-input" type="radio" name="check_allergy" id="check_allergy" value="true">&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="check_allergy">
                                             Yes
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="check_allergy" id="check_allergy" value="false" checked>
+                                        <input class="form-check-input" type="radio" name="check_allergy" id="check_allergy" value="false" checked>&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="check_allergy">
                                             No
                                         </label>
                                     </div>
-                                  </div>
-                                </div>
-                            </fieldset> 
+                            </div>
                             <div class="form-group">
                                 <label for="allergies" class="text-dark">Allergies:</label><br>
                                 <input type="text" name="allergies" id="allergies" class="form-control">
                             </div> 
                             <div class="form-group">
-                                <label for="attendance_day" class="text-dark">Admission Date:</label><br>
-                                <input type="text" name="admission_date" id="admission_date" class="form-control">
-                                <span class="add-on">
-                                    <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
-                                </span>
-                            </div>
-                            <script type="text/javascript">
-                                $(function() {
-                                    $('#datetimepicker4').datetimepicker({
-                                    pickTime: false
-                                    });
-                                });
-                            </script>                          
+                                <label for="admission_date" class="text-dark">Admission Date:</label><br>
+                                <input type="date" name="admission_date" id="admission_date" class="form-control">
+                            </div>                          
                             <div class="form-group">
                                 <label for="information" class="text-dark">Special Note:</label><br>
                                 <textarea name="information" id="information" class="form-control"></textarea>

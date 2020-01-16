@@ -44,6 +44,7 @@ class UsersController < ApplicationController
       if @user && @user.authenticate(params[:password])
           session[:user_id] = @user.id
           erb :'users/main'
+          #redirect to
       else
           @error_msg = true
           erb :index
@@ -100,7 +101,7 @@ class UsersController < ApplicationController
     else
       #@user = User.find_by(:username => params[:username])
       @user = current_user
-      @user.password_digest = params[:password]
+      @user.password = params[:password]
       @user.first_name = params[:first_name]
       @user.last_name = params[:last_name]
       @user.phone = params[:phone]

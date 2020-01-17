@@ -14,7 +14,7 @@
 
     <style>
         body {
-            /* background-image:url('/img/wheat.png'); */
+            background-image:url('/img/wheat.png');
         }
 
         .jumbotron{
@@ -48,7 +48,7 @@
 
       <div class="jumbotron text-center">
         <form form action="/logout" method="get">
-          <h1>Happy-Easy Care</h1>
+          <a href='/show' class="text-dark" style="text-decoration: none"><h1>Happy-Easy Care</h1></a>
           <h3>Hello! <%= current_user.username %></h3>
           <input type="submit" class="btn btn-warning" value="Log Out" >            
         </form>

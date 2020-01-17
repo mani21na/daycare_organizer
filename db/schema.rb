@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 5) do
+ActiveRecord::Schema.define(version: 6) do
 
   create_table "daycares", force: :cascade do |t|
     t.string "name"
@@ -35,11 +35,11 @@ ActiveRecord::Schema.define(version: 5) do
     t.integer "daycare_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "attd_mon"
-    t.boolean "attd_tue"
-    t.boolean "attd_wed"
-    t.boolean "attd_thu"
-    t.boolean "attd_fri"
+    t.boolean "attd_mon", default: false
+    t.boolean "attd_tue", default: false
+    t.boolean "attd_wed", default: false
+    t.boolean "attd_thu", default: false
+    t.boolean "attd_fri", default: false
   end
 
   create_table "users", force: :cascade do |t|

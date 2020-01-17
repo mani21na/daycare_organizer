@@ -3,8 +3,9 @@
             <div id="outline-row" class="row justify-content-center align-items-center">
                 <div id="outline-column" class="col-md-6">
                     <div id="outline-box" class="col-md-12">
-                        <form id="outline-form" class="form" action="/student" method="post">
-                            <h3 class="text-center text-dark">Register New Studetns</h3>
+                        <form id="outline-form" class="form" action='/student/<%= @student.id %>' method="post">
+                        <input id="hidden" type="hidden" name="_method" value="patch">
+                            <h3 class="text-center text-dark">Studetn Settings</h3>
                             <% if @error == true %>
                                 <div class="form-group">
                                     <a class="text-danger"> <%=@error_msg%> </a>
@@ -12,69 +13,69 @@
                             <%end%>
                             <div class="form-group">
                                 <label for="first_name" class="text-dark">First Name:</label><br>
-                                <input type="text" class="form-control" id="first_name" name="first_name">
+                                <input type="text" class="form-control" value="<%= @student.first_name %>" id="first_name" name="first_name">
                             </div>
                             <div class="form-group">
                                 <label for="birth_date" class="text-dark">Last Name:</label><br>
-                                <input type="text" name="last_name" id="last_name" class="form-control">
+                                <input type="text" value="<%= @student.last_name %>" name="last_name" id="last_name" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="birth_date" class="text-dark">Date of Birth:</label><br>
-                                <input type="date" name="birth_date" id="birth_date" class="form-control">
+                                <input type="date" value="<%= @student.birth_date %>" name="birth_date" id="birth_date" class="form-control">
                             </div> 
                             <div class="form-group">
                                 <label for="daycare_id" class="text-dark">Daycare:</label><br>
                                 <select name="daycare_id" id="daycare_id" class="form-control">
                                     <% @daycares.each do |daycare| %>
-                                        <option value="<%= daycare.id %>"><%= daycare.name %></option>
+                                        <option value="<%= daycare.id %>" <% if @student.daycare_id == daycare.id %> selected <%end%>><%= daycare.name %></option>
                                     <% end %>
                                 </select>
                             </div>
                             <div class="form-group">
-                                  <label for="attd_option" class="text-dark">Attendence Option:</label><br>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="attd_option" id="attd_option" value="part_time">&nbsp;&nbsp;&nbsp;
-                                        <label class="form-check-label" for="attd_option">
-                                            Part Time (7:30am - 1:00pm)
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="attd_option" id="attd_option" value="full_time" checked>&nbsp;&nbsp;&nbsp;
-                                        <label class="form-check-label" for="attd_option">
-                                            Full Time (7:30am - 5:00pm)
-                                        </label>
-                                    </div>
-                            </div>
-                            <!-- ERROR: not able to send multiple attendance day -->
+                                <label for="attd_option" class="text-dark">Attendence Option:</label><br>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="attd_option" id="attd_option" value="part_time" <% if @student.attd_option == "part_time" %> checked <%end%>>&nbsp;&nbsp;&nbsp;
+                                    <label class="form-check-label" for="attd_option">
+                                        Part Time (7:30am - 1:00pm)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="attd_option" id="attd_option" value="full_time" <% if @student.attd_option == "full_time" %> checked <%end%>>&nbsp;&nbsp;&nbsp;
+                                    <label class="form-check-label" for="attd_option">
+                                        Full Time (7:30am - 5:00pm)
+                                    </label>
+                                </div>
+                            </div>e
                             <fieldset class="form-group" name="attendance_day" id="attendance_day">
                                 <div class="column">
                                   <label for="attendance_day" class="text-dark">Attendance Days:</label><br>
                                     <div class="form-check" name="attd_mon" id="attd_mon">
-                                        <input class="form-check-input" type="checkbox" id="attd_mon" name="attd_mon" value="true">&nbsp;&nbsp;&nbsp;
+                                        <input class="form-check-input" type="checkbox" id="attd_mon" name="attd_mon" value="true" <% if @student.attd_mon == true %> checked <%end%>>&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="attd_mon">
                                             Mon
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="attd_tue" name="attd_tue" value="true">&nbsp;&nbsp;&nbsp; 
+                                        <input class="form-check-input" type="checkbox" id="attd_tue" name="attd_tue" value="true" <% if @student.attd_tue == true %> checked <%end%>>&nbsp;&nbsp;&nbsp; 
                                         <label class="form-check-label" for="attd_tue">
                                             Tue
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="attd_wed" name="attd_wed" value="true">&nbsp;&nbsp;&nbsp;
+                                        <input class="form-check-input" type="checkbox" id="attd_wed" name="attd_wed" value="true" <% if @student.attd_wed == true %> checked <%end%>>&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="attd_wed">
                                             Wed
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="attd_thu" name="attd_thu" value="true">&nbsp;&nbsp;&nbsp;
+                                        <input class="form-check-input" type="checkbox" id="attd_thu" name="attd_thu" value="true" <% if @student.attd_thu == true %> checked <%end%>>&nbsp;&nbsp;&nbsp;
+                                        <!-- <input name="attd_thu" type="hidden" value="false"> -->
                                         <label class="form-check-label" for="attd_thu">
                                             Thu
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="attd_fri" name="attd_fri" value="true">&nbsp;&nbsp;&nbsp;
+                                        <input class="form-check-input" type="checkbox" id="attd_fri" name="attd_fri" value="true" <% if @student.attd_fri == true %> checked <%end%>>&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="attd_fri">
                                             Fri
                                         </label> 
@@ -84,13 +85,13 @@
                             <div class="form-group">
                                   <label for="check_allergy" class="text-dark">Check Allergy:</label><br>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="check_allergy" id="check_allergy" value="true">&nbsp;&nbsp;&nbsp;
+                                        <input class="form-check-input" type="radio" name="check_allergy" id="check_allergy" value="true" <% if @student.check_allergy == true %> checked <%end%>>&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="check_allergy">
                                             Yes
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="check_allergy" id="check_allergy" value="false" checked>&nbsp;&nbsp;&nbsp;
+                                        <input class="form-check-input" type="radio" name="check_allergy" id="check_allergy" value="false" <% if @student.check_allergy == false %> checked <%end%>>&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="check_allergy">
                                             No
                                         </label>
@@ -98,22 +99,26 @@
                             </div>
                             <div class="form-group">
                                 <label for="allergies" class="text-dark">Allergies:</label><br>
-                                <input type="text" name="allergies" id="allergies" class="form-control">
+                                <input type="text" value="<%= @student.allergies %>" name="allergies" id="allergies" class="form-control">
                             </div> 
                             <div class="form-group">
                                 <label for="admission_date" class="text-dark">Admission Date:</label><br>
-                                <input type="date" name="admission_date" id="admission_date" class="form-control">
+                                <input type="date" value="<%= @student.admission_date %>" name="admission_date" id="admission_date" class="form-control">
                             </div>                          
                             <div class="form-group">
                                 <label for="information" class="text-dark">Special Note:</label><br>
-                                <textarea name="information" id="information" class="form-control"></textarea>
+                                <textarea value="<%= @student.information %>" name="information" id="information" class="form-control"></textarea>
                             </div>                             
                             <div class="form-group">
-                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">&nbsp;&nbsp;&nbsp;
                             </div>
                             <div id="link" class="text-right">
                                 <a href="/show" class="text-dark">Back to Main</a>
                             </div>
+                        </form>
+                        <form method="post" action="/student/<%= @student.id %>">
+                            <input type="hidden" name="_method" value="delete" />
+                            <input type="submit" name="delet" class="btn btn-danger btn-md" value="delet student">
                         </form>
                     </div>
                 </div>

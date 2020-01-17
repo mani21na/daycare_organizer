@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
-  #signup page
+  #Signup page
   get '/signup' do
     erb :'users/new'
   end
   
-  #create new user
+  #Create new user
   post '/user' do
     @error = false
+
     if params[:username] == "" || params[:password] == ""
       @error = true
       @error_msg = "Input Username And Password. Try Again"
@@ -37,14 +38,14 @@ class UsersController < ApplicationController
     end
   end
 
-  #login
+  #Login
   post '/login' do
       @user = User.find_by(:username => params[:username])
       @error_msg = false
       if @user && @user.authenticate(params[:password])
           session[:user_id] = @user.id
-          erb :'users/main'
-          #redirect to
+          #erb :'users/main'
+          redirect to "/show"
       else
           @error_msg = true
           erb :index
@@ -75,49 +76,51 @@ class UsersController < ApplicationController
     @error_message = params[:error]
 
     @user = current_user
-    erb :"users/user_edit"
+    erb :"users/edit_user"
   end
 
   patch '/user/edit' do
     redirect_if_not_logged_in 
     @error_message = params[:error]
 
+    @user = current_user
     @error = false
-    if params[:password] == ""
+
+    if !!User.find_by(:username => params[:username]) && @user.username != params[:username]
+      @error = true
+      @error_msg = "The username that you input is already registered."
+ 
+      erb :"users/edit_user"
+    elsif params[:password] == ""
       @error = true
       @error_msg = "Input Password. Try Again"
-      @user = current_user
-      erb :"users/user_edit"
+
+      erb :"users/edit_user"
     elsif params[:first_name] == "" || params[:last_name] == "" || params[:phone] == "" || params[:address] == "" || params[:relationship] == "" || params[:alternative_phone] == ""
       @error = true
       @error_msg = "Please Fill In All Items"
-      @user = current_user
-      erb :"users/user_edit"
+
+      erb :"users/edit_user"
     elsif params[:alternative_phone] == params[:phone]
       @error = true
       @error_msg = "Input Alternative Telephone"
-      @user = current_user
-      erb :"users/user_edit"
+
+      erb :"users/edit_user"
     else
-      #@user = User.find_by(:username => params[:username])
-      @user = current_user
-      @user.password = params[:password]
-      @user.first_name = params[:first_name]
-      @user.last_name = params[:last_name]
-      @user.phone = params[:phone]
-      @user.address = params[:address]
-      @user.relationship = params[:relationship]
-      @user.alternative_phone = params[:alternative_phone]
+      @user.username = params[:username] if @user.username != params[:username]
+      @user.password = params[:password] if @user.password != params[:password]
+      @user.first_name = params[:first_name].upcase if @user.last_name != params[:last_name]
+      @user.last_name = params[:last_name].upcase if @user.last_name != params[:last_name]
+      @user.phone = params[:phone] if @user.phone != params[:phone]
+      @user.address = params[:address] if @user.address != params[:address]
+      @user.relationship = params[:relationship] if @user.relationship != params[:relationship]
+      @user.alternative_phone = params[:alternative_phone] if @user.alternative_phone != params[:alternative_phone]
       @user.save
       
-      #@user.update(params[:password]) if @user.password != params[:password]
-      #@user.update(params[:last_name]) if @user.last_name != params[:last_name]
-      #@user.update(params[:phone]) if @user.phone != params[:phone]
-      #@user.update(params[:address]) if @user.address != params[:address]
-      #@user.update(params[:relationship]) if @user.relationship != params[:relationship]
-      #@user.update(params[:alternative_phone]) if @user.alternative_phone != params[:alternative_phone]
-
-      redirect to '/user/account/edit'
+      @error = true
+      @error_msg = "You successfully changed user settings."
+      
+      erb :"users/edit_user"
     end
   end
 end

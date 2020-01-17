@@ -1,10 +1,12 @@
 require './config/environment'
 
-#if defined?(ActiveRecord::Migrator) && ActiveRecord::Migrator.needs_migration?
-#  raise 'Migrations are pending run `rake db:migrate` to resolve the issue.'
-#end
-
+# Sinatra middleware, must be placed above all controllers. 
+#It will interpret any requests with name="_method" by translating 
+#the request to whatever is set by the value attribute.
 use Rack::MethodOverride
+
 use UsersController
 use StudentsController
+use DaycaresController
+
 run ApplicationController

@@ -50,30 +50,36 @@
                                 <div class="column">
                                   <label for="attendance_day" class="text-dark">Attendance Days:</label><br>
                                     <div class="form-check" name="attd_mon" id="attd_mon">
+                                        <input name="attd_mon" type="hidden" value="false">
                                         <input class="form-check-input" type="checkbox" id="attd_mon" name="attd_mon" value="true">&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="attd_mon">
                                             Mon
                                         </label>
                                     </div>
                                     <div class="form-check">
+                                        <input name="attd_mon" type="hidden" value="false"><input name="attd_mon" type="hidden" value="false">
+
                                         <input class="form-check-input" type="checkbox" id="attd_tue" name="attd_tue" value="true">&nbsp;&nbsp;&nbsp; 
                                         <label class="form-check-label" for="attd_tue">
                                             Tue
                                         </label>
                                     </div>
                                     <div class="form-check">
+                                        <input name="attd_wed" type="hidden" value="false">
                                         <input class="form-check-input" type="checkbox" id="attd_wed" name="attd_wed" value="true">&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="attd_wed">
                                             Wed
                                         </label>
                                     </div>
                                     <div class="form-check">
+                                        <input name="attd_thu" type="hidden" value="false">
                                         <input class="form-check-input" type="checkbox" id="attd_thu" name="attd_thu" value="true">&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="attd_thu">
                                             Thu
                                         </label>
                                     </div>
                                     <div class="form-check">
+                                        <input name="attd_fri" type="hidden" value="false">
                                         <input class="form-check-input" type="checkbox" id="attd_fri" name="attd_fri" value="true">&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="attd_fri">
                                             Fri
@@ -112,7 +118,7 @@
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
                             </div>
                             <div id="link" class="text-right">
-                                <a href="/show" class="text-dark">Back to Main</a>
+                                <a href="/show" class="text-info">Back to Main</a>
                             </div>
                         </form>
                     </div>

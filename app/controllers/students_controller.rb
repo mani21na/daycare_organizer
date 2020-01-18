@@ -111,7 +111,6 @@ class StudentsController < ApplicationController
         end
     end
 
-
     #Delet student
     delete "/student/:id" do
         redirect_if_not_logged_in 

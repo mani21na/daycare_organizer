@@ -8,5 +8,6 @@ use Rack::MethodOverride
 use UsersController
 use StudentsController
 use DaycaresController
+use TimetablesController
 
 run ApplicationController

@@ -1,3 +1,3 @@
 class Timetable < ActiveRecord::Base 
-    belons to :student
+    belongs_to :student
 end

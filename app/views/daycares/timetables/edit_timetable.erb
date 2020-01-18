@@ -1,0 +1,55 @@
+<div id="outline">
+        <div class="container">
+            <div id="outline-row" class="row justify-content-center align-items-center">
+                <div id="outline-column" class="col-md-6">
+                    <div id="outline-box" class="col-md-12">
+                        <h2 class="text-center text-dark"><%= @daycare.name %></h2>
+                        <h5 class="text-center text-dark"><%= @daycare.information %></h5>
+                        <h5 class="text-center text-dark">Tel: <%= @daycare.phone %></h5>
+                        <h5 class="text-center text-dark"><%= @daycare.address %></h5>
+                        <h5 class="text-center text-danger"><%= @daycare.announcement %></h5>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <% if @error == true %>
+                            <div class="form-group">
+                                <a class="text-danger"> <%=@error_msg%> </a>
+                            </div>                        
+                        <%end%>
+                        <div class="form-group">
+                            <label for="first_name" class="text-dark">Student Name:</label>
+                            <label for="first_name" class="text-dark"><%= @student.first_name %> <%= @student.last_name %></label><br>
+                        </div>
+                        
+                        <form id="outline-form" class="form" action='/timetable/<%= @timetable.id %>' method="post">
+                        <input id="hidden" type="hidden" name="_method" value="patch">
+                            <div class="form-group">
+                                <label for="admission_date" class="text-dark">Absence (<%= Time.now.strftime("%m/%d/%Y %a") %>):</label>&nbsp;&nbsp;
+                                <input name="absence" type="hidden" value="false">
+                                <input class="form-check-input" type="checkbox" name="absence" value="true" <% if @timetable.date == Time.now.strftime("%m/%d/%Y") && @timetable.absence == true %>checked<% end %>><br>
+                            </div>
+                            <div class="form-group">
+                                <label for="admission_date" class="text-dark">Check-in Time (<%= Time.now.strftime("%m/%d/%Y %a") %>):</label>
+                                <input type="time" name="check_in" id="check_in" class="form-control" <% if @timetable.date == Time.now.strftime("%m/%d/%Y") %>value="<%= @timetable.check_in %>"<% end %>>
+                            </div>
+                            <div class="form-group">
+                                <label for="admission_date" class="text-dark">Check-out Time (<%= Time.now.strftime("%m/%d/%Y %a") %>):</label>
+                                <input type="time" name="check_out" id="check_out" class="form-control" <% if @timetable.date == Time.now.strftime("%m/%d/%Y") %>value="<%= @timetable.check_out %>"<% end %>> 
+                            </div>
+                            <div class="form-group">
+                                <label for="report" class="text-dark">Message to Daycare:</label><br>
+                                <textarea name="report" id="report" class="form-control"><% if @timetable.date == Time.now.strftime("%m/%d/%Y") %><%= @timetable.report %><% end %></textarea>
+                            </div> 
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                            </div>
+                            <div id="link" class="text-right">
+                                <a href="/show" class="text-info">Back to Main</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

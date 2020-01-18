@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 6) do
+ActiveRecord::Schema.define(version: 8) do
 
   create_table "daycares", force: :cascade do |t|
     t.string "name"
@@ -40,6 +40,18 @@ ActiveRecord::Schema.define(version: 6) do
     t.boolean "attd_wed", default: false
     t.boolean "attd_thu", default: false
     t.boolean "attd_fri", default: false
+    t.integer "timetable_id"
+  end
+
+  create_table "timetables", force: :cascade do |t|
+    t.string "date"
+    t.string "check_in"
+    t.string "check_out"
+    t.text "report"
+    t.boolean "absence"
+    t.integer "student_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

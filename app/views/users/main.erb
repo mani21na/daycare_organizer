@@ -10,13 +10,20 @@
                             <label for="username" class="text-dark"><%= @user.first_name %> <%= @user.last_name %><%current_user.username%></label>&nbsp;&nbsp;&nbsp; 
                             <a href="/user/account/edit" class="text-info">Account Settings</a>
                         </div>
+                        <br>
+                        <br>
+                        <% if @error == true %>
+                            <div class="form-group">
+                                <a class="text-danger"> <%=@error_msg%> </a>
+                            </div>                        
+                        <%end%>
                         <% if @user.students.count != 0 %>
                             <p>"Please click kid's name for accessing their daycare."</p>
                         <% end %>
                         <% @user.students.each do |student| %>
                             <div class="form-group">
                                 <label for="student_name" class="text-dark">Student Name: </label>
-                                <a href="/daycare/<%= student.id %>"><%= student.first_name %> <%= student.last_name %></a>&nbsp;&nbsp;&nbsp; 
+                                <a href="/timetable/<%= student.id %>/new"><%= student.first_name %> <%= student.last_name %></a>&nbsp;&nbsp;&nbsp; 
                                 <a href="/student/<%= student.id %>/edit" class="text-info">Student Settings</a>
                             </div>
                         <% end %>

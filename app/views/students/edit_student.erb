@@ -50,24 +50,28 @@
                                 <div class="column">
                                   <label for="attendance_day" class="text-dark">Attendance Days:</label><br>
                                     <div class="form-check" name="attd_mon" id="attd_mon">
+                                        <input name="attd_mon" type="hidden" value="false">
                                         <input class="form-check-input" type="checkbox" id="attd_mon" name="attd_mon" value="true" <% if @student.attd_mon == true %> checked <%end%>>&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="attd_mon">
                                             Mon
                                         </label>
                                     </div>
                                     <div class="form-check">
+                                        <input name="attd_tue" type="hidden" value="false">
                                         <input class="form-check-input" type="checkbox" id="attd_tue" name="attd_tue" value="true" <% if @student.attd_tue == true %> checked <%end%>>&nbsp;&nbsp;&nbsp; 
                                         <label class="form-check-label" for="attd_tue">
                                             Tue
                                         </label>
                                     </div>
                                     <div class="form-check">
+                                        <input name="attd_wed" type="hidden" value="false">
                                         <input class="form-check-input" type="checkbox" id="attd_wed" name="attd_wed" value="true" <% if @student.attd_wed == true %> checked <%end%>>&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="attd_wed">
                                             Wed
                                         </label>
                                     </div>
                                     <div class="form-check">
+                                        <input name="attd_thu" type="hidden" value="false">
                                         <input class="form-check-input" type="checkbox" id="attd_thu" name="attd_thu" value="true" <% if @student.attd_thu == true %> checked <%end%>>&nbsp;&nbsp;&nbsp;
                                         <!-- <input name="attd_thu" type="hidden" value="false"> -->
                                         <label class="form-check-label" for="attd_thu">
@@ -75,6 +79,7 @@
                                         </label>
                                     </div>
                                     <div class="form-check">
+                                        <input name="attd_fri" type="hidden" value="false">
                                         <input class="form-check-input" type="checkbox" id="attd_fri" name="attd_fri" value="true" <% if @student.attd_fri == true %> checked <%end%>>&nbsp;&nbsp;&nbsp;
                                         <label class="form-check-label" for="attd_fri">
                                             Fri
@@ -112,14 +117,14 @@
                             <div class="form-group">
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">&nbsp;&nbsp;&nbsp;
                             </div>
-                            <div id="link" class="text-right">
-                                <a href="/show" class="text-dark">Back to Main</a>
-                            </div>
                         </form>
                         <form method="post" action="/student/<%= @student.id %>">
                             <input type="hidden" name="_method" value="delete" />
                             <input type="submit" name="delet" class="btn btn-danger btn-md" value="delet student">
                         </form>
+                        <div id="link" class="text-right">
+                            <a href="/show" class="text-info">Back to Main</a>
+                        </div>
                     </div>
                 </div>
             </div>

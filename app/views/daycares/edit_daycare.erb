@@ -3,8 +3,9 @@
             <div id="outline-row" class="row justify-content-center align-items-center">
                 <div id="outline-column" class="col-md-6">
                     <div id="outline-box" class="col-md-12">
-                        <form id="outline-form" class="form" action="/daycare" method="post">
-                            <h3 class="text-center text-dark">Register New Daycare</h3>
+                        <form id="outline-form" class="form" action="/daycare/<%= @daycare.id %>" method="post">
+                        <input id="hidden" type="hidden" name="_method" value="patch">
+                            <h3 class="text-center text-dark">Daycare Settings</h3>
                             <% if @error == true %>
                                 <div class="form-group">
                                     <a class="text-danger"> <%=@error_msg%> </a>
@@ -12,42 +13,46 @@
                             <%end%>
                             <div class="form-group">
                                 <label for="name" class="text-dark">Name:</label><br>
-                                <input type="text" class="form-control" id="name" name="name">
+                                <input type="text" class="form-control" id="name" name="name" value="<%= @daycare.name %>">
                             </div>
                             <div class="form-group">
                                 <label for="phone" class="text-dark">Telephon:</label><br>
-                                <input type="tel" value="(555)-555-5555" name="phone" id="phone" class="form-control">
+                                <input type="tel" name="phone" id="phone" class="form-control" value="<%= @daycare.phone %>">
                             </div>
                             <div class="form-group">
                                 <label for="address" class="text-dark">Address:</label><br>
-                                <input type="text" name="address" id="address" class="form-control">
+                                <input type="text" name="address" id="address" class="form-control" value="<%= @daycare.address %>">
                             </div> 
                             <div class="form-group">
                                 <label for="information" class="text-dark">Information:</label><br>
-                                <textarea name="information" id="information" class="form-control"></textarea>
+                                <textarea name="information" id="information" class="form-control"><%= @daycare.information %></textarea>
                             </div> 
                             <div class="form-group">
                                 <label for="announcement" class="text-dark">Announcement:</label><br>
-                                <textarea name="announcement" id="announcement" class="form-control"></textarea>
+                                <textarea name="announcement" id="announcement" class="form-control"><%= @daycare.announcement %></textarea>
                             </div>
                             <br>
                             <br>
-                            <h3 class="text-center text-dark">Register Daycare Admin User</h3>
+                            <h3 class="text-center text-dark">Admin User setting</h3>
                             <div class="form-group">
                                 <label for="username" class="text-dark">User Name:</label><br>
-                                <input type="email" name="username" id="username" class="form-control">
+                                <input type="email" name="username" id="username" class="form-control" value="<%= @adminuser.username %>">
                             </div> 
                             <div class="form-group">
                                 <label for="password" class="text-dark">Password:</label><br>
-                                <input type="text" name="password" id="password" class="form-control">
+                                <input type="text" name="password" id="password" class="form-control" value="<%= @adminuser.password %>">
                             </div> 
                             <div class="form-group">
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
-                            </div>                        
-                            <div id="link" class="text-right">
-                                <a href="/daycare/show" class="text-info">Back to Main</a>
-                            </div>
+                            </div>                    
                         </form>
+                        <form method="post" action="/daycare/<%= @daycare.id %>">
+                        <input type="hidden" name="_method" value="delete" />
+                            <input type="submit" name="delet" class="btn btn-danger btn-md" value="Delet Daycare">
+                        </form>
+                        <div id="link" class="text-right">
+                            <a href="/daycare/show" class="text-info">Back to Main</a>
+                        </div>
                     </div>
                 </div>
             </div>

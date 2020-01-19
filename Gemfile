@@ -17,3 +17,4 @@ gem 'tux'
 gem 'capybara'
 gem 'bootstrap', '~> 4.4.1'
 gem 'bcrypt' #transforming password
+#gem 'activerecord-deprecated_finders', require: 'active_record/deprecated_finders'

@@ -4,34 +4,36 @@ class TimetablesController < ApplicationController
         redirect_if_not_logged_in
         @error_message = params[:error]
 
-        @user = current_user
-        @student = Student.find(params[:id])
-        @daycare = Daycare.find(@student.daycare_id.to_s)
-        @timetable = @student.timetables.find_by(:date => Time.now.strftime("%m/%d/%Y"))
-        
-
-
-        if student_attd_validate(@student) == false
-            @error = true
-            @error_msg = "The student that you click is not attendence today"
-            erb :'users/main_user'
-            #redirect to "/show"
-        elsif !!@timetable
-            #erb :"/daycares/timetables/edit_timetable"
-            redirect to "/timetable/#{@timetable.id}/edit"
+        if admin_user?
+            redirect to '/dyacare/show'
         else
-            erb :"/daycares/timetables/new_timetable"
-        end
-
+            @user = current_user
+            @student = Student.find(params[:id])
+            @daycare = Daycare.find(@student.daycare_id.to_s)
+            @timetable = @student.timetables.find_by(:date => Time.now.strftime("%m/%d/%Y"))
 =begin
+            if student_attd_validate(@student) == false
+                @error = true
+                @error_msg = "The student that you click is not attendence today"
+                erb :'users/main_user'
+                #redirect to "/show"
+            elsif !!@timetable
+                #erb :"/daycares/timetables/edit_timetable"
+                redirect to "/timetable/#{@timetable.id}/edit"
+            else
+                erb :"/students/timetables/new_timetable"
+            end
+=end
+#=begin
         #for test, remove when you finish test
         if !!@timetable
             #erb :"/daycares/timetables/edit_timetable"
             redirect to "/timetable/#{@timetable.id}/edit"
         else
-            erb :"/daycares/timetables/new_timetable"
+            erb :"/students/timetables/new_timetable"
         end
-=end
+#=end
+        end
     end
 
     post '/timetable/:id' do
@@ -54,6 +56,14 @@ class TimetablesController < ApplicationController
             @error = true
             @error_msg = "If you checked [Absence Check-box], it is not able to input Check-out."
             redirect to "/timetable/#{@student.id}/new"
+        elsif params[:check_in] == "" && params[:check_out] != ""
+            @error = true
+            @error_msg = "You are missing Check-in."
+            redirect to "/timetable/#{@student.id}/new"
+        elsif params[:check_in] >= params[:check_out]
+            @error = true
+            @error_msg = "Please input valid check-in and check-out."
+            redirect to "/timetable/#{@student.id}/new"
         else
             @timetable = Timetable.create(:date => Time.now.strftime("%m/%d/%Y"), 
                                         :check_in => params[:check_in], 
@@ -71,16 +81,15 @@ class TimetablesController < ApplicationController
     get '/timetable/:id/edit' do
         redirect_if_not_logged_in 
         @error_message = params[:error]
-
-        #@user = current_user
-        #@student = Student.find(params[:id])
-        #@daycare = Daycare.find_by(:id => @student.daycare_id.to_s)
-        #@timetable = @student.timetables.find_by(:date => Time.now.strftime("%m/%d/%Y"))
-        @timetable = Timetable.find(params[:id])
-        @student = Student.find(@timetable.student_id.to_s)
-        @daycare = Daycare.find(@student.daycare_id.to_s)
-    
-        erb :'/daycares/timetables/edit_timetable'
+        if admin_user?
+            redirect to '/daycare/show'
+        else
+            @timetable = Timetable.find(params[:id])
+            @student = Student.find(@timetable.student_id.to_s)
+            @daycare = Daycare.find(@student.daycare_id.to_s)
+            
+            erb :'/students/timetables/edit_timetable'
+        end
     end
 
     patch '/timetable/:id' do
@@ -97,17 +106,21 @@ class TimetablesController < ApplicationController
         if params[:absence] == "true" && params[:check_in] != ""
             @error = true
             @error_msg = "If you checked [Absence Check-box], it is not able to input Check-in."
-            erb :'/daycares/timetables/edit_timetable'
+            erb :'/students/timetables/edit_timetable'
         elsif params[:absence] == "true" && params[:check_out] != ""
             @error = true
             @error_msg = "If you checked [Absence Check-box], it is not able to input Check-out."
-            erb :'/daycares/timetables/edit_timetable'
+            erb :'/students/timetables/edit_timetable'
         elsif @timetable.date != Time.now.strftime("%m/%d/%Y")
             redirect to "/timetable/#{@student.id}/new"
         elsif params[:check_in] == "" && params[:check_out] != ""
             @error = true
             @error_msg = "You are missing Check-in."
-            erb :'/daycares/timetables/edit_timetable'
+            erb :'/students/timetables/edit_timetable'
+        elsif params[:check_in] >= params[:check_out]
+            @error = true
+            @error_msg = "Please input valid check-in and check-out."
+            erb :'/students/timetables/edit_timetable'
         else
             @timetable.check_in = params[:check_in] if @timetable.check_in != params[:check_in]
             @timetable.check_out = params[:check_out] if @timetable.check_out != params[:check_out]

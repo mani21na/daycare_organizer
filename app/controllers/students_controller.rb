@@ -4,9 +4,13 @@ class StudentsController < ApplicationController
         redirect_if_not_logged_in 
         @error_message = params[:error]
 
-        @user = current_user
-        @daycares = Daycare.all
-        erb :"/students/new_student"
+        if admin_user?
+            redirect to '/daycare/show'
+        else
+            @user = current_user
+            @daycares = Daycare.all
+            erb :"/students/new_student"
+        end
     end
 
     post "/student" do
@@ -15,6 +19,7 @@ class StudentsController < ApplicationController
         @user = current_user
         @daycares = Daycare.all
         @error = false
+
         if params[:first_name] == "" || params[:last_name] == ""
             @error = true
             @error_msg = "Input First Name and Last Name. Try Again"
@@ -27,10 +32,18 @@ class StudentsController < ApplicationController
             @error = true
             @error_msg = "Please, Fill Allergies"
             erb :"/students/new_student"#, locals: {message: "Please, Fill Allergies"}
+        elsif params[:check_allergy] == "false" && params[:allergies] != ""
+            @error = true
+            @error_msg = "If the kid has allergies, Please click 'Yes' on Check Allergy."
+            erb :'/students/new_student'
         elsif params[:birth_date] == "" || params[:admission_date] == "" || params[:attendance_day] == ""
             @error = true
             @error_msg = "You are missing information"
             erb :"/students/new_student"#, locals: {message: "You are missing information"}
+        elsif params[:attd_mon] == "false" && params[:attd_tue] == "false" && params[:attd_wed] == "false" && params[:attd_thu] == "false" && params[:attd_fri] == "false"
+            @error = true
+            @error_msg = "You are missing Attendance Days"
+            erb :"/students/new_student"
         else
             @student = Student.create(:first_name => params[:first_name].upcase, 
                                     :last_name => params[:last_name].upcase, 
@@ -57,10 +70,14 @@ class StudentsController < ApplicationController
         redirect_if_not_logged_in 
         @error_message = params[:error]
 
-        @student = Student.find(params[:id])
-        @daycares = Daycare.all
+        if admin_user?
+            redirect to '/daycare/show'
+        else
+            @student = Student.find(params[:id])
+            @daycares = Daycare.all
 
-        erb :'/students/edit_student'
+            erb :'/students/edit_student'
+        end
     end
 
     patch '/student/:id' do
@@ -70,7 +87,7 @@ class StudentsController < ApplicationController
         @student = Student.find(params[:id])
         @daycares = Daycare.all
         @user = current_user
-
+   
         @error = false
         if params[:first_name] == "" || params[:last_name] == ""
             @error = true
@@ -84,10 +101,18 @@ class StudentsController < ApplicationController
             @error = true
             @error_msg = "Please, Fill Allergies"
             erb :'/students/edit_student'#, locals: {message: "Please, Fill Allergies"}
+        elsif params[:check_allergy] == "false" && params[:allergies] != ""
+            @error = true
+            @error_msg = "If the kid has allergies, Please click 'Yes' on Check Allergy."
+            erb :'/students/edit_student'            
         elsif params[:birth_date] == "" || params[:admission_date] == "" || params[:attendance_day] == ""
             @error = true
             @error_msg = "You are missing information"
-            erb :'/students/edit_student'#, locals: {message: "You are missing information"}
+            erb :'/students/edit_student'#, locals: {message: "You are missing information"}   
+        elsif params[:attd_mon] == "false" && params[:attd_tue] == "false" && params[:attd_wed] == "false" && params[:attd_thu] == "false" && params[:attd_fri] == "false"
+            @error = true
+            @error_msg = "You are missing Attendance Days"
+            erb :'/students/edit_student'
         else
             @student.first_name = params[:first_name].upcase if @student.first_name != params[:first_name].upcase
             @student.last_name = params[:last_name].upcase if @student.last_name != params[:last_name].upcase
@@ -117,6 +142,8 @@ class StudentsController < ApplicationController
         @error_message = params[:error]
 
         Student.destroy(params[:id])
+        @tt_list = Timetable.all.find_all{ |t| t.student_id.to_s == params[:id]}
+        @tt_list.each{ |t| t.destroy }
         redirect to "/show"
     end
 end

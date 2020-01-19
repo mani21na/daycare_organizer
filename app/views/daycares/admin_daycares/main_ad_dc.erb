@@ -1,0 +1,29 @@
+<div id="outline">
+    <div class="container">
+        <div id="outline-row" class="row justify-content-center align-items-center">
+            <div id="outline-column" class="col-md-6">
+                <div id="outline-box" class="col-md-12">
+                    <h2 class="text-center text-dark"><%= @daycare.name %></h2>
+                    <h5 class="text-center text-dark"><%= @daycare.information %></h5>
+                    <h5 class="text-center text-dark">Tel: <%= @daycare.phone %></h5>
+                    <h5 class="text-center text-dark"><%= @daycare.address %></h5>
+                    <h5 class="text-center text-danger"><%= @daycare.announcement %></h5>
+                    <form id="outline-form" class="form" action="/admin/daycare/<%=@daycare.id%>/edit" method="post">
+                    <input id="hidden" type="hidden" name="_method" value="patch">
+                        <input type="submit" name="submit" class="btn btn-info btn-block" value="Edit">
+                    </form>
+                </div>
+            </div>
+        
+            <div id="outline-column" class="col-md-6">
+                <div id="outline-box" class="col-md-12">
+                    <h2 class="text-center text-dark"><%= @daycare.name %></h2>
+                    <h5 class="text-center text-dark"><%= @daycare.information %></h5>
+                    <h5 class="text-center text-dark">Tel: <%= @daycare.phone %></h5>
+                    <h5 class="text-center text-dark"><%= @daycare.address %></h5>
+                    <h5 class="text-center text-danger"><%= @daycare.announcement %></h5>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>

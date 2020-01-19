@@ -1,0 +1,124 @@
+<!-- Student Part-->
+<div id="outline">
+    <div class="container">
+        <div id="outline-row" class="row justify-content-center align-items-center">
+            <div id="outline-column" class="col-md-6">
+                <div id="outline-box" class="col-md-12">
+                    <h3 class="text-center text-dark">Student Information</h3>
+                    <div class="form-group">
+                            <label for="first_name" class="text-dark">First Name: </label><br>
+                            <label for="first_name" class="text-success"><%= @student.first_name %></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name" class="text-dark">Last Name: </label><br>
+                        <label for="last_name" class="text-success"><%= @student.last_name %></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="birth_date" class="text-dark">Date of Birth: </label><br>
+                        <label for="birth_date" class="text-success"><%= @student.birth_date %></label>
+                    </div> 
+                    <div class="form-group">
+                        <label for="daycare_id" class="text-dark">Daycare:</label><br>
+                        <label for="daycare_id" class="text-success"><%= @daycare.name %></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="attd_option" class="text-dark">Attendence Option:</label><br>
+                        <label for="attd_option" class="text-success"><%= @student.attd_option %></label>
+                    </div>
+                    <fieldset class="form-group" name="attendance_day" id="attendance_day">
+                        <div class="column">
+                          <label for="attendance_day" class="text-dark">Attendance Days:</label><br>
+                            <% if @student.attd_mon == true%>
+                                <label for="attd_mon" class="text-success">Mon</label><br>
+                            <% end %>
+                            <% if @student.attd_tue == true%>
+                                <label for="attd_tue" class="text-success">Tue</label><br>
+                            <% end %>
+                            <% if @student.attd_wed == true%>
+                                <label for="wed" class="text-success">Wed</label><br>
+                            <% end %>
+                            <% if @student.attd_thu == true%>
+                                <label for="attd_thu" class="text-success">Thu</label><br>
+                            <% end %>
+                            <% if @student.attd_fri == true%>
+                                <label for="attd_mon" class="text-success">Fri</label>
+                            <% end %>
+                        </div>
+                    </fieldset>
+                    <div class="form-group">
+                            <label for="check_allergy" class="text-dark">Check Allergy:</label><br>
+                            <label for="check_allergy" class="text-success">
+                                <% if @student.check_allergy == true %> 
+                                    Yes
+                                <% else %>
+                                    No
+                                <% end %>
+                            </label>
+                    </div>
+                    <% if @student.check_allergy == true %>
+                        <div class="form-group">
+                            <label for="allergies" class="text-dark">Allergies:</label><br>
+                            <label for="allergies" class="text-success"><%= @student.allergies %></label>
+                        </div>
+                    <% end %> 
+                    <div class="form-group">
+                        <label for="admission_date" class="text-dark">Admission Date:</label><br>
+                        <label for="admission_date" class="text-success"><%= @student.admission_date %></label>
+                    </div>                          
+                    <div class="form-group">
+                        <label for="information" class="text-dark">Special Note:</label><br>
+                        <label for="information" class="text-success"><%= @student.information %></label>
+                    </div>                  
+                    <div class="form-group">
+                        <input type="button" class = "btn btn-secondary" value="Go back" onclick="history.back()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Parent Part-->
+<div id="outline">
+    <div class="container">
+        <div id="outline-row" class="row justify-content-center align-items-center">
+            <div id="outline-column" class="col-md-6">
+                <div id="outline-box" class="col-md-12">
+                    <h3 class="text-center text-dark">Parent Information</h3>
+                    <div class="form-group">
+                            <label for="username" class="text-dark">User Name: </label><br>
+                            <label for="username" class="text-success"><%= @parent.username %></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="first_name" class="text-dark">First Name: </label><br>
+                        <label for="first_name" class="text-success"><%= @parent.first_name %></label>
+                    </div> 
+                    <div class="form-group">
+                        <label for="last_name" class="text-dark">Last Name:</label><br>
+                        <label for="last_name" class="text-success"><%= @parent.last_name %></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="text-dark">Phone Number:</label><br>
+                        <label for="phone" class="text-success"><%= @parent.phone %></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="address" class="text-dark">Address:</label><br>
+                        <label for="address" class="text-success"><%= @parent.address %></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="relationship" class="text-dark">Relationship with Student(s):</label><br>
+                        <label for="relationship" class="text-success"><%= @parent.relationship %></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="alternative_phone" class="text-dark">Alternative Phone Number:</label><br>
+                        <label for="alternative_phone" class="text-success"><%= @parent.alternative_phone %></label>
+                    </div>                                          
+                    <div class="form-group">
+                        <input type="button" class = "btn btn-secondary" value="Go back" onclick="history.back()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

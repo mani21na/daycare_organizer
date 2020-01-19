@@ -33,6 +33,14 @@ class ApplicationController < Sinatra::Base
           User.find(session[:user_id])
         end
     
+        def not_admin_user?
+          current_user.admin_flag == nil
+        end
+
+        def daycare_admin_user?
+          current_user.admin_flag == 2
+        end
+
         def admin_user?
           current_user.admin_flag == 1
         end

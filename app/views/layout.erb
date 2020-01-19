@@ -25,7 +25,7 @@
         #outline .container #outline-row #outline-column #outline-box {
             margin-top: 25px;
             width: 100%;
-            margin-bottom: 25px;
+            margin-bottom: 75px;
             height: 75%;
             background-color: rgba(234, 234, 234, 0.9);
         }
@@ -49,13 +49,17 @@
       <div class="jumbotron text-center">
         <form form action="/logout" method="get">
           <% if admin_user? %>
-            <a href='daycare/show' class="text-dark" style="text-decoration: none"><h1>Happy-Easy Care</h1></a>
-          <% else %>
+            <a href='/daycare/show' class="text-dark" style="text-decoration: none"><h1>Happy-Easy Care</h1></a>
+            <h3>Hello! <%= current_user.username %></h3>
+          <% elsif daycare_admin_user? %>
+            <a href='/admin/show' class="text-dark" style="text-decoration: none"><h1>Happy-Easy Care</h1></a>
+            <h3>Hello! <%= current_admin_user.username %></h3>
+          <% elsif not_admin_user?%>
             <a href='/show' class="text-dark" style="text-decoration: none"><h1>Happy-Easy Care</h1></a>
+            <h3>Hello! <%= current_user.username %></h3>
           <% end %>
-          <h3>Hello! <%= current_user.username %></h3>
-          <input type="submit" class="btn btn-warning" value="Log Out" >            
-        </form>
+          <input type="submit" class="btn btn-warning" value="Log Out" >
+        </form>          
       </div>
 
     <% else %>

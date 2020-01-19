@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
   #Create new user
   get '/signup' do
-    erb :'users/new'
+    if session[:user_id] != nil
+      session.destroy
+      erb :'users/new'
+    else
+      erb :'users/new'
+    end
   end
   
   post '/user' do
@@ -39,15 +44,16 @@ class UsersController < ApplicationController
 
   #Login
   get '/show' do
-    if !logged_in?
+    if !logged_in? 
       redirect to '/'
     end
 
     @user = current_user
 
     if admin_user?
-      @daycare_list = Daycare.all
-      erb :'daycares/main_admin'
+      redirect to '/daycare/show'
+    elsif daycare_admin_user?
+      redirect to '/admin/show'
     else
       erb :'users/main_user'
     end
@@ -82,8 +88,14 @@ class UsersController < ApplicationController
     redirect_if_not_logged_in 
     @error_message = params[:error]
 
-    @user = current_user
-    erb :"users/edit_user"
+    if admin_user?
+      redirect to '/daycare/show'
+    elsif daycare_admin_user?
+      redirect to '/admin/show'
+    else
+      @user = current_user
+      erb :"users/edit_user"
+    end
   end
 
   patch '/user/edit' do

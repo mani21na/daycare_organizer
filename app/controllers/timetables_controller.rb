@@ -14,7 +14,8 @@ class TimetablesController < ApplicationController
         if student_attd_validate(@student) == false
             @error = true
             @error_msg = "The student that you click is not attendence today"
-            erb :'users/main'
+            erb :'users/main_user'
+            #redirect to "/show"
         elsif !!@timetable
             #erb :"/daycares/timetables/edit_timetable"
             redirect to "/timetable/#{@timetable.id}/edit"

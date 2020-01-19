@@ -1,10 +1,9 @@
 class UsersController < ApplicationController
-  #Signup page
+  #Create new user
   get '/signup' do
     erb :'users/new'
   end
   
-  #Create new user
   post '/user' do
     @error = false
 
@@ -34,30 +33,38 @@ class UsersController < ApplicationController
                           :relationship => params[:relationship],
                           :alternative_phone => params[:alternative_phone])
       session[:user_id] = @user.id
-      erb :'users/main'
+      erb :'users/main_user'
     end
   end
 
   #Login
+  get '/show' do
+    if !logged_in?
+      redirect to '/'
+    end
+
+    @user = current_user
+
+    if admin_user?
+      @daycare_list = Daycare.all
+      erb :'daycares/main_admin'
+    else
+      erb :'users/main_user'
+    end
+  end
+
   post '/login' do
       @user = User.find_by(:username => params[:username])
       @error_msg = false
+
       if @user && @user.authenticate(params[:password])
           session[:user_id] = @user.id
-          #erb :'users/main'
+
           redirect to "/show"
       else
           @error_msg = true
           erb :index
       end
-  end
-
-  get '/show' do
-    if !logged_in?
-      redirect to '/'
-    end
-    @user = current_user
-    erb :'users/main'
   end
   
   #Logout
@@ -109,8 +116,8 @@ class UsersController < ApplicationController
     else
       @user.username = params[:username] if @user.username != params[:username]
       @user.password = params[:password] if @user.password != params[:password]
-      @user.first_name = params[:first_name].upcase if @user.last_name != params[:last_name]
-      @user.last_name = params[:last_name].upcase if @user.last_name != params[:last_name]
+      @user.first_name = params[:first_name].upcase if @user.last_name != params[:last_name].upcase
+      @user.last_name = params[:last_name].upcase if @user.last_name != params[:last_name].upcase
       @user.phone = params[:phone] if @user.phone != params[:phone]
       @user.address = params[:address] if @user.address != params[:address]
       @user.relationship = params[:relationship] if @user.relationship != params[:relationship]

@@ -89,8 +89,8 @@ class StudentsController < ApplicationController
             @error_msg = "You are missing information"
             erb :'/students/edit_student'#, locals: {message: "You are missing information"}
         else
-            @student.first_name = params[:first_name] if @student.first_name != params[:first_name]
-            @student.last_name = params[:last_name] if @student.last_name != params[:last_name]
+            @student.first_name = params[:first_name].upcase if @student.first_name != params[:first_name].upcase
+            @student.last_name = params[:last_name].upcase if @student.last_name != params[:last_name].upcase
             @student.birth_date = params[:birth_date] if @student.birth_date != params[:birth_date]
             @student.daycare_id = params[:daycare_id] if @student.daycare_id != params[:daycare_id]
             @student.attd_option = params[:attd_option] if @student.attd_option != params[:attd_option]

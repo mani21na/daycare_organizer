@@ -48,7 +48,11 @@
 
       <div class="jumbotron text-center">
         <form form action="/logout" method="get">
-          <a href='/show' class="text-dark" style="text-decoration: none"><h1>Happy-Easy Care</h1></a>
+          <% if admin_user? %>
+            <a href='daycare/show' class="text-dark" style="text-decoration: none"><h1>Happy-Easy Care</h1></a>
+          <% else %>
+            <a href='/show' class="text-dark" style="text-decoration: none"><h1>Happy-Easy Care</h1></a>
+          <% end %>
           <h3>Hello! <%= current_user.username %></h3>
           <input type="submit" class="btn btn-warning" value="Log Out" >            
         </form>

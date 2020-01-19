@@ -1,0 +1,31 @@
+<div id="outline">
+        <div class="container">
+            <div id="outline-row" class="row justify-content-center align-items-center">
+                <div id="outline-column" class="col-md-6">
+                    <div id="outline-box" class="col-md-12">
+                        <h3 class="text-center text-dark">Admin page</h3>
+                        <% if @error == true %>
+                            <div class="form-group">
+                                <a class="text-danger"> <%=@error_msg%> </a>
+                            </div>                        
+                        <%end%>
+                        <p>"Please click Daycare's name for accessing their STUDENT LIST."</p>
+                        <% num = 0 %>
+                        <% @daycare_list.each do |daycare| %>
+                            <% num += 1 %>
+                            <div class="form-group">
+                                <label for="daycare_name" class="text-dark"><%= num %>. </label>
+                                <a href="/daycare/student/<%= daycare.id %>" class="text-dark"><%= daycare.name %></a>&nbsp;&nbsp;&nbsp;
+                                <a href="/daycare/<%= daycare.id %>/edit" class="text-info">Daycare Settings</a>&nbsp;&nbsp;&nbsp;
+                            </div>
+                        <% end %>
+                        <form id="outline-form" class="form" action="/daycare/new" method="GET">
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="Add Daycare">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

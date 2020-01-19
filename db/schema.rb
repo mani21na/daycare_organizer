@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 8) do
+ActiveRecord::Schema.define(version: 10) do
+
+  create_table "adminusers", force: :cascade do |t|
+    t.string "user_name"
+    t.string "password_digest"
+    t.integer "daycare_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "daycares", force: :cascade do |t|
     t.string "name"
@@ -20,6 +28,7 @@ ActiveRecord::Schema.define(version: 8) do
     t.text "announcement"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "del_flag"
   end
 
   create_table "students", force: :cascade do |t|
@@ -41,6 +50,7 @@ ActiveRecord::Schema.define(version: 8) do
     t.boolean "attd_thu", default: false
     t.boolean "attd_fri", default: false
     t.integer "timetable_id"
+    t.integer "del_flag"
   end
 
   create_table "timetables", force: :cascade do |t|
@@ -65,6 +75,8 @@ ActiveRecord::Schema.define(version: 8) do
     t.string "alternative_phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "admin_flag"
+    t.integer "del_flag"
   end
 
 end

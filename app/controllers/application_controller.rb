@@ -10,7 +10,12 @@ class ApplicationController < Sinatra::Base
     end
 
     get '/' do 
+      if session[:user_id] != nil
+        session.destroy
         erb :index
+      else
+        erb :index
+      end
     end
 
     helpers do
@@ -28,5 +33,8 @@ class ApplicationController < Sinatra::Base
           User.find(session[:user_id])
         end
     
+        def admin_user?
+          current_user.admin_flag == 1
+        end
       end
 end

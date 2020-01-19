@@ -1,0 +1,30 @@
+<div id="outline">
+        <div class="container">
+            <div id="outline-row" class="row justify-content-center align-items-center">
+                <div id="outline-column" class="col-md-6">
+                    <div id="outline-box" class="col-md-12">
+                        <h3 class="text-center text-dark">Student List of <%= @daycare.name %></h3>
+                        <% if @error == true %>
+                            <div class="form-group">
+                                <a class="text-danger"> <%=@error_msg%> </a>
+                            </div>                        
+                        <% end %>
+                        <% if !@student_list.empty? %>
+                            <p>"Please click Student's name for accessing their Information."</p>
+                            <% num = 0 %>
+                            <% @student_list.each do |student| %>
+                                <% num += 1 %>
+                                <div class="form-group">
+                                    <label for="numbering" class="text-dark"><%= num %>. </label>
+                                    <a href="/daycare/<%= student.id %>/student" class="text-dark"><%= student.first_name %> <%= student.last_name %></a>&nbsp;&nbsp;&nbsp;
+                                </div>
+                            <% end %>
+                        <% end %>
+                        <div id="link" class="text-right">
+                            <a href="/daycare/show" class="text-info">Back to Main</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

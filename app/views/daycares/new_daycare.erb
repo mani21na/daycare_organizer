@@ -1,0 +1,55 @@
+<div id="outline">
+        <div class="container">
+            <div id="outline-row" class="row justify-content-center align-items-center">
+                <div id="outline-column" class="col-md-6">
+                    <div id="outline-box" class="col-md-12">
+                        <form id="outline-form" class="form" action="/daycare" method="post">
+                            <h3 class="text-center text-dark">Register New Daycare</h3>
+                            <% if @error == true %>
+                                <div class="form-group">
+                                    <a class="text-danger"> <%=@error_msg%> </a>
+                                </div>                        
+                            <%end%>
+                            <div class="form-group">
+                                <label for="name" class="text-dark">Name:</label><br>
+                                <input type="text" class="form-control" id="name" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="text-dark">Telephon:</label><br>
+                                <input type="phone" name="phone" id="phone" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="address" class="text-dark">Address:</label><br>
+                                <input type="text" name="address" id="address" class="form-control">
+                            </div> 
+                            <div class="form-group">
+                                <label for="information" class="text-dark">Information:</label><br>
+                                <textarea name="information" id="information" class="form-control"></textarea>
+                            </div> 
+                            <div class="form-group">
+                                <label for="announcement" class="text-dark">Announcement:</label><br>
+                                <textarea name="textarea" id="announcement" class="form-control"></textarea>
+                            </div>
+                            <br>
+                            <br>
+                            <h3 class="text-center text-dark">Register Daycare Admin User</h3>
+                            <div class="form-group">
+                                <label for="user_name" class="text-dark">User Name:</label><br>
+                                <input type="email" name="user_name" id="user_name" class="form-control">
+                            </div> 
+                            <div class="form-group">
+                                <label for="password" class="text-dark">Password:</label><br>
+                                <input type="text" name="password" id="password" class="form-control">
+                            </div> 
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                            </div>                        
+                            <div id="link" class="text-right">
+                                <a href="/daycare/show" class="text-info">Back to Main</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

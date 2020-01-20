@@ -1,0 +1,45 @@
+<div id="outline">
+        <div class="container">
+            <div id="outline-row" class="row justify-content-center align-items-center">
+                <div id="outline-column" class="col-md-6">
+                    <div id="outline-box" class="col-md-12">
+                        <form id="outline-form" class="form" action="/admin/<%= @daycare.id %>" method="post">
+                        <input id="hidden" type="hidden" name="_method" value="patch">
+                            <h3 class="text-center text-dark">Daycare Settings</h3>
+                            <% if @error == true %>
+                                <div class="form-group">
+                                    <a class="text-danger"> <%=@error_msg%> </a>
+                                </div>                        
+                            <%end%>
+                            <div class="form-group">
+                                <label for="name" class="text-dark">Name:</label><br>
+                                <input type="text" class="form-control" id="name" name="name" value="<%= @daycare.name %>">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="text-dark">Telephon:</label><br>
+                                <input type="tel" name="phone" id="phone" class="form-control" value="<%= @daycare.phone %>">
+                            </div>
+                            <div class="form-group">
+                                <label for="address" class="text-dark">Address:</label><br>
+                                <input type="text" name="address" id="address" class="form-control" value="<%= @daycare.address %>">
+                            </div> 
+                            <div class="form-group">
+                                <label for="information" class="text-dark">Information:</label><br>
+                                <textarea name="information" id="information" class="form-control"><%= @daycare.information %></textarea>
+                            </div> 
+                            <div class="form-group">
+                                <label for="announcement" class="text-dark">Announcement:</label><br>
+                                <textarea name="announcement" id="announcement" class="form-control"><%= @daycare.announcement %></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                            </div>                    
+                        </form>
+                        <div id="link" class="text-right">
+                            <a href="/admin/show" class="text-info">Back to Main</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -179,7 +179,7 @@ class DaycaresController < ApplicationController
     get '/daycare/:id/student' do
         redirect_if_not_logged_in
 
-        if !admin_user?
+        if not_admin_user?
             redirect to '/show'
         else
             @student = Student.find(params[:id])
@@ -189,22 +189,72 @@ class DaycaresController < ApplicationController
         end
     end
 
-    #Daycare Admin Log-in
+    #Daycare Admin: Log-in
     get '/admin/show' do
         if !logged_in?
-            redirect to '/admin'
+            redirect to '/'
         end
 
         @adminuser = current_user
-
+        @error = false
         if admin_user?
             redirect to '/daycare/show'
         elsif daycare_admin_user?
-            @student_list = Student.all.find_all{ |s| s.user_id.to_s == params[:id] && s.del_flag == 1}
-            @daycare = Daycare.find(@student_list.first.daycare_id)
-            erb :'daycares/admin_daycares/main_ad_dc'
+            @adminstudent_list = Student.all.find_all{ |s| s.user_id == @adminuser.id && s.del_flag == 1}
+            @daycare = Daycare.find(@adminstudent_list.first.daycare_id.to_s)
+            @student_list = Student.all.find_all{ |s| s.daycare_id == @daycare.id && s.del_flag != 1}
+
+            if @student_list.empty?
+                @error = true
+                @error_msg = "This daycare dosen't have students"
+                erb :'daycares/admin/main_ad_dc'
+            else
+                erb :'daycares/admin/main_ad_dc'
+            end
         else
-            redirect to '/daycare/show'
+            redirect to '/show'
         end
     end
+
+    #Daycare Admin: daycare edit
+    get '/admin/daycare/:id/edit' do
+        redirect_if_not_logged_in
+
+        if !daycare_admin_user?
+            redirect to '/show'
+        else
+            @daycare = Daycare.find(params[:id].to_s)
+            @student_list = Student.all.find_all{ |s| s.daycare_id == @daycare.id && s.del_flag == nil}
+            erb :'daycares/admin/edit_ad_dc'
+        end
+    end
+
+    patch '/admin/:id' do
+        redirect_if_not_logged_in
+        
+        if !daycare_admin_user?
+            redirect to '/show'
+        else
+            @error = false
+
+            @daycare = Daycare.find(params[:id])
+            if params[:name] == "" || params[:phone] == "" || params[:address] == ""
+                @error = true
+                @error_msg = "Input Name and Telephon and Address. Try Again"
+                erb :'daycares/edit_daycare'
+            else
+                @daycare.name = params[:name] if @daycare.name != params[:name]
+                @daycare.phone = params[:phone] if @daycare.phone != params[:phone]
+                @daycare.address = params[:address] if @daycare.address != params[:address]
+                @daycare.information = params[:information] if @daycare.information != params[:information]
+                @daycare.announcement = params[:announcement] if @daycare.announcement != params[:announcement]
+                @daycare.save
+
+                @error = true
+                @error_msg = "You successfully changed settings of #{@daycare.name}."
+                erb :'daycares/admin/edit_ad_dc'
+            end
+        end       
+    end
+
 end

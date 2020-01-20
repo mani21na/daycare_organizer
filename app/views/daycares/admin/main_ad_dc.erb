@@ -1,0 +1,57 @@
+<div id="outline">
+    <div class="container">
+        <div id="outline-row" class="row justify-content-center align-items-center">
+            <div id="outline-column" class="col-md-6">
+                <div id="outline-box" class="col-md-12">
+                    <h2 class="text-center text-dark"><%= @daycare.name %></h2>
+                    <h5 class="text-center text-dark"><%= @daycare.information %></h5>
+                    <h5 class="text-center text-dark">Tel: <%= @daycare.phone %></h5>
+                    <h5 class="text-center text-dark"><%= @daycare.address %></h5>
+                    <h5 class="text-center text-danger"><%= @daycare.announcement %></h5>
+                    <form id="outline-form" class="form" action="/admin/daycare/<%=@daycare.id%>/edit" method="GET">
+                        <input type="submit" name="submit" class="btn btn-info btn-block" value="Edit">
+                    </form>
+                </div>
+            </div>
+        
+            <div id="outline-column" class="col-md-6">
+                <div id="outline-box" class="col-md-12">
+                    <h2 class="text-center text-dark">Student(s) List</h2>
+                    <% if @error == true %>
+                        <div class="form-group">
+                            <a class="text-danger"> <%=@error_msg%> </a>
+                        </div>                        
+                    <% end %>
+                    <% if !@student_list.empty? %>
+                        <p>"Please click student's name for accessing their information."</p>
+                        <% num = 0 %>
+                        <% @student_list.each do |student| %>
+                            <% num += 1 %>
+                            <div class="form-group">
+                                <label for="numbering" class="text-dark"><%= num %>. </label>
+                                <a href="/daycare/<%= student.id %>/student" class="text-dark"><%=student.first_name  %> <%= student.first_name %></a>&nbsp;&nbsp;&nbsp;
+                                <!-- checkin checkout -->
+                                <% @tt = student.timetables.find_by(:date => Time.now.strftime("%m/%d/%Y")) %>
+                                <% if !!@tt %>
+                                    <% if @tt.absence %>
+                                        <br>&nbsp;&nbsp;&nbsp;&nbsp;<label for="absence" class="text-danger"><%= Time.now.strftime("%m/%d/%Y %a") %> Absence</label>
+                                    <% end %>
+                                    <% if !@tt.absence %>
+                                        <br>&nbsp;&nbsp;&nbsp;&nbsp;<label for="today_ci" class="text-dark"><%= Time.now.strftime("%m/%d/%Y %a") %>  Check-in: </label>&nbsp;
+                                        <label for="today_ci" class="text-dark"><%= @tt.check_in %></label>&nbsp;
+                                        <label for="today_co" class="text-dark">Check-out: </label>&nbsp;
+                                        <label for="today_co" class="text-dark"><%= @tt.check_out %></label>&nbsp;
+                                    <% end %>
+                                    <% if @tt.report != "" %>
+                                        <br>&nbsp;&nbsp;&nbsp;&nbsp;<label for="report" class="text-dark">Message from Parent: </label>&nbsp;
+                                        <label for="report" class="text-dark"><%= @tt.report %></label>&nbsp;
+                                    <% end %>
+                                <% end %>
+                            </div>
+                        <% end %>  
+                    <% end %>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>

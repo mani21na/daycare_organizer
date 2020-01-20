@@ -44,5 +44,16 @@ class ApplicationController < Sinatra::Base
         def admin_user?
           current_user.admin_flag == 1
         end
+
+        def student_attd_validate(student)
+          date = Time.now.strftime("%a").downcase
+          validate = false
+          validate = true if student.attd_mon == true && student.attd_mon == date
+          validate = true if student.attd_tue == true && student.attd_mon == date
+          validate = true if student.attd_wed == true && student.attd_mon == date
+          validate = true if student.attd_thu == true && student.attd_mon == date
+          validate = true if student.attd_fri == true && student.attd_mon == date
+          validate
+        end
       end
 end

@@ -257,4 +257,33 @@ class DaycaresController < ApplicationController
         end       
     end
 
+    get '/daycares/most_popular' do
+        @daycare = Daycare.all.max_by{|daycare| daycare.students.count}
+        @page_name = "The most popular daycare"
+        erb :'daycares/info_daycare'
+        #Most popular daycare. Daycare with the most students.      
+        #Daycare has many students 
+        #Some daycares have more students than others 
+        #We want to find the daycare with the MOST students 
+        #How do I find out how many students one daycare has?
+        #daycare = Daycare.first
+        #daycare.id => 1
+        #daycare.students => [<Student>, <Student>, <Student>]
+        #daycare.students.count => 3
+        #daycare2 = Daycare.second 
+        #daycare.students.count => 4       
+    end 
+
+    get '/daycares/least_popular' do
+        @daycare = Daycare.all.min_by{ |daycare| daycare.students.count }
+        @page_name = "The least popular daycare"
+        erb :'daycares/info_daycare'
+    end
+
 end
+
+# Write a custom route '/daycares/most_popular' that shows the user IN THE BROWSER the daycare with the most students 
+#STEPS:
+#In Daycare controller, write a get method to '/daycares/most_popular'
+#In that method, we need to search database to find which daycare is the most popular 
+#Then, send user to a new erb page that shows that daycare information 

@@ -48,11 +48,11 @@ class ApplicationController < Sinatra::Base
         def student_attd_validate(student)
           date = Time.now.strftime("%a").downcase
           validate = false
-          validate = true if student.attd_mon == true && student.attd_mon == date
-          validate = true if student.attd_tue == true && student.attd_mon == date
-          validate = true if student.attd_wed == true && student.attd_mon == date
-          validate = true if student.attd_thu == true && student.attd_mon == date
-          validate = true if student.attd_fri == true && student.attd_mon == date
+          validate = true if student.attd_mon == true && "mon" == date
+          validate = true if student.attd_tue == true && "tue" == date
+          validate = true if student.attd_wed == true && "wed" == date
+          validate = true if student.attd_thu == true && "thu" == date
+          validate = true if student.attd_fri == true && "fri" == date
           validate
         end
       end

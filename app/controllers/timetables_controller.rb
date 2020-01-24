@@ -68,8 +68,10 @@ class TimetablesController < ApplicationController
                                         :absence => params[:absence], 
                                         :student_id => params[:id])
             
-            #erb :'/daycares/timetables/edit_timetable'
-            redirect to "/timetable/#{@timetable.id}/edit"
+            @error = true
+            @error_msg = "You successfully changed the timetable."
+            erb :'/students/timetables/edit_timetable'
+            #redirect to "/timetable/#{@timetable.id}/edit"
         end
     end
 
@@ -119,9 +121,11 @@ class TimetablesController < ApplicationController
             @timetable.absence = params[:absence] if @timetable.absence != params[:absence]
             @timetable.report = params[:report] if @timetable.report != params[:report]
             @timetable.save
-
+            @error = true
+            
+            @error_msg = "You successfully changed the timetable."
             #erb :'/daycares/timetables/edit_timetable'#, locals: {message: "You are missing information"}
-            redirect to "/timetable/#{@timetable.id}/edit"
+            erb :'/students/timetables/edit_timetable'
         end
     end
     

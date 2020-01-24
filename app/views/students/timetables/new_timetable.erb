@@ -8,16 +8,10 @@
                         <h5 class="text-center text-dark">Tel: <%= @daycare.phone %></h5>
                         <h5 class="text-center text-dark"><%= @daycare.address %></h5>
                         <h5 class="text-center text-danger"><%= @daycare.announcement %></h5>
-                   </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="outline">
-        <div class="container">
-            <div id="outline-row" class="row justify-content-center align-items-center">
-                <div id="outline-column" class="col-md-6">
-                    <div id="outline-box" class="col-md-12">
+                        <br>
+                        <br>
+                        <br>
+                        <br>
                         <% if @error == true %>
                             <div class="form-group">
                                 <a class="text-danger"> <%=@error_msg%> </a>

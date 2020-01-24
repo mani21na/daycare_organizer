@@ -1,0 +1,34 @@
+<div id="outline">
+        <div class="container">
+            <div id="outline-row" class="row justify-content-center align-items-center">
+                <div id="outline-column" class="col-md-6">
+                    <div id="outline-box" class="col-md-12">
+                        <h3 class="text-center text-dark"><%= @page_name %></h3>
+                        <div class="form-group">
+                            <label for="name" class="text-dark">Name:</label><br>
+                            <label for="name" class="text-dark"><%= @daycare.name %></label>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="text-dark">Telephon:</label><br>
+                            <label for="phone" class="text-dark"><%= @daycare.phone %></label>
+                        </div>
+                        <div class="form-group">
+                            <label for="address" class="text-dark">Address:</label><br>
+                            <label for="address" class="text-dark"><%= @daycare.address %></label>
+                        </div> 
+                        <div class="form-group">
+                            <label for="information" class="text-dark">Information:</label><br>
+                            <label for="information" class="text-dark"><%= @daycare.information %></label>
+                        </div> 
+                        <div class="form-group">
+                            <label for="announcement" class="text-dark">Announcement:</label><br>
+                            <label for="announcement" class="text-dark"><%= @daycare.announcement %></label>
+                        </div>               
+                        <div id="link" class="text-right">
+                            <a href="/daycare/show" class="text-info">Back to Main</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

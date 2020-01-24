@@ -258,7 +258,9 @@ class DaycaresController < ApplicationController
     end
 
     get '/daycares/most_popular' do
-        @daycare = Daycare.all.max_by{|daycare| daycare.students.count}
+        binding.pry
+        @daycare = Daycare.all.group_by{|daycare| daycare.students.count}.max.last
+
         @page_name = "The most popular daycare"
         erb :'daycares/info_daycare'
         #Most popular daycare. Daycare with the most students.      
@@ -275,7 +277,7 @@ class DaycaresController < ApplicationController
     end 
 
     get '/daycares/least_popular' do
-        @daycare = Daycare.all.min_by{ |daycare| daycare.students.count }
+        @daycare = Daycare.all.group_by{ |daycare| daycare.students.count }.min.last
         @page_name = "The least popular daycare"
         erb :'daycares/info_daycare'
     end
